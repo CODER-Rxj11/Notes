@@ -1,0 +1,309 @@
+TO MAKE A NEW APP WE USE :                             req - browser res - backend
+
+express app'sname --view=ejs
+
+TO OPEN VS CODE DIRECTLY FROM CDN:
+
+code . (==> ENTER)
+	
+TO CREATE NEW ROUTES USE 
+
+routes/index.ejs
+
+TO CREATE NEW HTML PAGES USE 
+
+views/
+
+TO CREATE css
+../stylesheets/style.css
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+ROUTER --> INDEX PAGE
+router.get('/', function(req, res) {              
+  fs.readdir("./files", function(err, data){
+    if(err) console.log(err);
+    else res.render('index', {data, 	file:"",name:""});                       //INDEX - Index.ejs
+  })
+  
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//ROUTER --> CREATE FILE
+router.get('/Create', function(req, res) {
+  fs.writeFile(`files/${req.query.filename}`, `${req.query.content}` , function(err, data){
+    if(err) res.send(err);
+    else res.redirect("/");
+  });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//ROUTER --> DELETE FILE
+router.get('/Delete/:plc', function(req, res) {
+  fs.unlink(`files/${req.params.plc}`,function(err){
+    if(err) throw(err);
+    else res.redirect("/");
+  });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//ROUTER --> OPEN FILE
+router.get('/Open/:plc', function(req, res) {
+  fs.readFile(`files/${req.params.plc}`,"utf-8", function(err, file){
+    if(err) console.log(err);
+    else { 
+      fs.readdir("./files", function(err, data){
+      if(err) console.log(err);
+      else res.render('index', {file, data, name:req.params.plc});
+    })}
+  });
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+//ROUTER --> UPDATE FILE
+router.get('/Update/:plc', function(req, res) {
+  fs.appendFile(`./files/${req.params.plc}`,req.query.textarea,function(err,data){
+    if(err) console.log(err);
+    else res.redirect("/");
+  });
+});
+
+https error --> occurs when node pakages is not installed --> installed by npm i
+
+ejs- html users
+hbs - handle bars --> <~ ..... ~>
+pug/jade - python users - indentations only  
+
+/remove public from the linking of stylesheet 
+
+route css is linked with every file 
+
+// error first functions node --> 
+
+read/file -- readdir---
+render  
+
+req.query(FORM), req.body , req.parangs
+
+Get sumission -- > url me values dikhengi
+
+/user/:plc => req.params
+get form submission => req.query (AFTER QUESTION MARK SYMBOL)
+post form submission => req.body
+single values - req.params
+form submission without 
+ 
+cname // WITHOUT EXTENSION
+.gitignore //WITHOUT FNAME
+
+if(name.split(".").length == 2 && name.split(".")[1] == ''){
+	res.render("data")
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// 2D ARRAY USING JAVASCRIPT
+
+["delhi", "bombay", "chennai"].map(function(val){
+	return val.split('e').join("");
+});
+
+// 2D ARRAY --> Last me E jodo
+
+["delhi", "bombay", "chennai"].map(function(val){
+	return val.split('e').join("") + 'e';
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// TO CLEAR ALL THE APPS RUNNING AT PORT 3000 USE : 
+netstat -ano | findstr :3000
+tskill 16056(IP NUMBER)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+TO EDIT IN DIV --> contentEditable="true";
+designMode = "on";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+// router.get('/', function(req, res, next) {
+//   res.render('index', files:"", data:"");
+// });
+
+// router.get('/read/:plc', function(req, res, next) {
+//   fs.readFile(`./files/${req.params.plc}`, "utf-8", function(err,data){
+//   fs.readdir(`./files`, function(err, files){
+  // res.render("index", );
+// });  
+
+//   });
+// });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+./ ==> FOLDER K ANDER KI FILES 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+TO ACCESS PATH UNDER PUBLIC SECTION FILES 
+var path = require('path');
+console.log(path.join(__dirname, '..', 'public', 'files'));
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+DATABASE :- 
+
+CRUD OPERATIONS:-
+CREATE --->
+READ ----->
+UPDATE --->
+DELETE --->
+
+SQL(STRUCTURED QUERRY LAUNGUAGE) --->ORACLE(MYSQL SOFTWARE)---> QUERIES --> SELECT EVERYTHING FROM A TABLE
+DATA STRUCTURE --> ARRAY AND OBJECT --> MAINLY LINKLIST
+
+NOSQL(NOT ONLY STRUCTURED QUERRY LAUNGUAGE)---->(MONGO DB/CASENDRA)(SOFTWARE AS A SERVICE) EASY AS COMPARED TO MYSQL --> CONTAINS OBJECT(JAVASCRIPT)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SERVERS 
+
+APPLICATION SERVER --> USER HANDLER
+|			^
+|(ACCESS)		|(RESPONCE)
+V			|
+DATABASE SERVER -----> DATABASE HANDLE
+					
+	(NODE.js)		   CONNECT    (MONGO DB)
+applicationserver  <----------> databaseserver
+	(EXPRESS)  				(MONGOOSE)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+-->STEPS TO USE MONGODB
+// require mongoose
+// connect mongoose with mongodb
+// create a Schema
+// create model and export
+
+
+
+SCHEMA ---> DATABASE ----> ALL NESSARY DETAILS FOR THE PRODUCT ---> CREATES AND ARCHITECTURE/MODAL OF THE PRODUCT WHICH CAN PERFORM CRUD OPERATIONS 
+
+db.users.find().pretty() ---> 
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+moongodb = db
+moongoose = connect db from server
+express = nodejs server
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+find() = all elements
+findOne()=  starting element
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SHERY STATUS APP
+
+YOU CAN WRITE AND UPDATE
+UPDATES WILL BE VISIBLE FOR AN HOUR
+LIKE, COMMENT FUNC AVAIL
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+COOKIE AND SESSION - USED TO SAVE SOME OF INFO IN FRONT END TO REDIRECT IN ANOTHER PAGE IN BACKEND AND MATCH
+WITH THE KEY AT THE FRONT END
+
+COOKIE - KEY SAVED AT FRONTEND(BROWSER)
+SESSION - KEY SAVED AT BACKEND(SERVER)
+
+// SYNTAX MAKING COOKIE AND SESSION POSSIBLE
+app.use(expressSession){			//ALLOWS TO SAVE SESSION
+	resave : false,				//NOT ADDING ANY OTHER DETAILS OR PASSWORD TO AVOID LOAD(CREATE)
+	saveUninitialized : false,		//NOT SAVE ANY UNIMPORTANT DETAILS TO AVOID LOAD(ALLOW)
+	secret : "bolo zubaan kesari"	//ADDING MORE SECURITY TO THE PASSWORD(ALLOW)
+}
+////////////////////////////////////////////////////////////////////////////////////////
+
+passport --> register,login,logout and Creates Protected Routes
+
+////////////////////////////////////////////////////////////////////////////////////////
+
+passport.initialize() --> Start The passport 
+Plm - Passport-local-mongoose => pakage used for following functions
+serialisedUser --> encrpytion
+DeserialisedUser --> deencrpytion
+Register() --> Creates a newUser
+
+passport.authenticate('local') --> NOW U BECOME A AUTHENTIC USER AND U HAVE ACESS ALL THE PAGES
+('req.session.passport.user'--> username(As a Cookie))
+
+///////////////////////////////////////////////////////////////////////////////////////
+HOW TO SEE SALT AND HASH OF SERVER (AS A SAVED VERSION OF PASSWORD)
+
+c drive 
+mongo db --> bin
+mongoose file/mongood file
+use path
+show collection
+users
+db.users.find().pretty()
+
+////////////////////////////////////////////////////////////////////////////////////////
+# name
+# username
+# password => jdbjdvJVEDHBBDJBHJ //ENCRYTION
+# jdbjdvJVEDHBBDJBHJ => password //DECRYPTION (NOT EVERY TIME POSSIBLE)
+
+# FOR THIS PASSPORT IS USED FOR : 
+# 1) ENCRYTION
+# 2) DECRYPTION
+# 3) PROTECTED ROUTES
+
+# passport local -> local pakage -> register through username and password 
+# passport -> base for login/register
+# passport local mongoose -> serialized(ENCRYPT) and deserialised(DECRYPT) and register(REGISTER) user function provider
+# mongoose -> db
+# express-session -> cookie Session
+
+# Protected Routes -> /profile -> only goes when user is LOgged in
+
+# LOgged in => (FRONT END)jdbjdvJVEDHBBDJBHJ <=(ENCRYTED BY SECREAT KEY)=> (BACK END)dbjdvJVEDHBBDJBHJ
+
+# THis is possible by the help of cookie and Session
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+changes in ejs = not get logout --> server update
+changes in js = logout --> server restart
+////////////////////////////////////////////////////////////////////////////////////////////////////
+use myapp
+users
+users.db
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+ajax json --> xml http req (XHR) 		
+ajax --> front -->backend(WITHOUT PAGE REFRESH) [CONCEPT]
+json --> Format of data (JAVASCRIPT OBJECT NOTATION)
+axios --> To use Ajax
+eg:- {
+	"name" : "Raj"
+}
+JSON.parse() --> Use JSON --> Object
+JSON.stringify --> Use Object --> JSON
+
+socketio --> For Live Chatting App
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+xml --> predefined + userdefined tags + BoilerPlate
+html --> predefined tags + BoilerPlate
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+SAVE THE CONNECTION OF BACKEND AND FRONTEND
+backend -> session
+frontend -> cookie 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+WEB SOCKETS --> On Loading A Website Without Reloading , Data Is Recieved To User Thus Established A Live
+			  2 Ways Connection B/W FrontEnd And BackEnd Instantaneously [CONCEPT]
+
+socket io --> To Use Web Socket 
+restful api
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+jwt --> password ==> bearer(//token) EncrytedPassword ==> mern/react/angular
