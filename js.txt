@@ -1,0 +1,242 @@
+// js is a partially oops based launguage
+if(NaN === NaN){
+	console.log("Hey");
+}
+else{
+	console.log("Lab");
+}
+
+ans :- Lab
+
+#Note :- NaN is uncomparable specially with == and === somehow deals with IsNaN
+
+window -> ek exposed variable hai
+		 jisme js ke kafi sare pre build methods and properties save hai.
+
+this -> special value in js which denotes some special values in some special context such as window 
+	    and objects
+
+	-> window(console.log(this)) [At global level]
+	-> window (
+				var abcd = abcd(){
+					console.log(this);
+				}
+	   abcd();
+			)
+	-> object(
+		var raj = {
+			name : "raj",
+			age : 20,
+			currentQual : "Fresher",
+			isHandsome : turu,
+			isVeryHandsome : turu,
+			tellDetails : function(){ 			//Method
+				console.log(this)	
+			}
+};) 
+
+	-> object with function gives window as "this"
+	-> arrow function gives window as "this"
+	-> arrow function also borrows this value from the parent 
+		--> thus we are advised to dont make arrow head function inside es5 functions
+		--> var raj = {
+			name : "raj",
+			age : 20,
+			currentQual : "Fresher",
+			isHandsome : turu,
+			isVeryHandsome : turu,
+			tellDetails : function(){ 			//Method
+				var def = () => {
+					console.log(this);
+				}
+				def();
+			}
+};
+
+raj.tellDetails(); [At local level]
+
+# es5 vs es6 FUnctions
+-> es5 function always reset this value whereas es6 function always borrow the value from the parent 
+
+# console.log(this); == window
+# var abc = function abc(){
+		console.log(this); == object
+	}
+#	this-> object -> method -> function(es5) = window -->function(es6) = object
+//  es5 -> var that = this
+
+// CONSTRUCTOR FUNCTION IN JS 
+-> a value is initialized (as a blank object in which values are been take
+   on the basis of "this") jab NEW keyword ko use krke save kre ek variable me.
+
+-> In this New refers to blank object and stores value of "this" as object.
+
+-> In this we create a similar structure and use new for updating diff values using this structure.
+
+
+function createHuman(name, age){  
+	this.name = name;
+	this.age = age;
+}
+
+createHuman.prototype.sayname = function(){
+		console.log("Hello");-
+	}
+
+var human1 = new createHuman("raj", 20);
+
+#call -> to make function scope object
+	 ->	to call a function making sure u can control the value of this.
+	 ->	In this method , we can pass as much as parameters to this function
+ 	function abcd(){
+		console.log(this);   //window
+	}						  |
+							  |
+	var obj = {				  |
+		name : "raj"			  |
+	}						  |
+							  V
+	abcd.call(obj);		  //object
+
+#apply -> 
+
+#bind ->
+
+connditionals -> Check wheather the statement is true of false and do some work according to the 
+					 result
+				 -> if , else if, else
+ 
+loops -> for()
+			->>if we want to break a loop
+	   -> forEach()
+			->>for arrays (99%)
+
+# with for
+var arr = [1,2,3,4,5]
+var sum = 0;
+for(var i=0; i<arr.length; i++){
+	sum += arr[i];
+}
+
+#with forEach
+var arr = [1,2,3,4,5]
+arr.forEach(function(elem){
+	sum += elem;
+});
+
+array 
+	-> Collection of datatypes 
+	-> is also treated as object in js as js was a first class function launguage
+		--> arr.freeze() => Object.freeze(arr)
+
+#in JS
+var arr = [1,2,3,4];
+ //on compilation
+	{
+		"0" : 1,
+		"1" : 2,
+		"2" : 3,
+		"3" : 4
+	}
+
+#Ques
+var arr = [1,2,3,4];
+var arr2 = arr (Refernce copied)
+var arr3 = [...arr]; //SPREAD OPERATOR USED TO MAKE REAL COPY OF ARRAY IN PLACE OF REFERENCE COPY
+
+#
+var arr = [1,2,3,4];
+
+function abcd(a,b,c,d){
+	
+}
+
+abcd(...arr);
+
+function -> 
+object	-> Detail of a single unit
+
+var raj = {
+	name : "raj",
+	age : 20,
+	currentQual : "Fresher",
+	isHandsome : turu,
+	isVeryHandsome : turu,
+	tellDetails : function(){ 			//Method
+	}
+};
+
+
+ARRAYS OF OBJECTS
+
+var arr = [
+	{},
+	{}
+]
+
+js -> partially OOPS based launguage
+
+Class -> Classes are a template for creating objects. They encapsulate data with code to work on that data.
+	 -> Classes in JS are built on prototypes but also have some syntax and semantics that are not shared 
+	    with ES5 class-like semantics.
+	 -> Class is a Syntactical sugar (To take it an )in js which means it look like class but it's not 
+	 -> es6 AND After
+	 -> Class --> Object
+
+	class Abcd{
+		a = 12;		//Variables
+		calc(){		//Functions
+		
+		}
+		lab = () =>{	//Arrow functions
+
+		}
+		
+	}
+	
+	const mem1 = new Abcd();
+
+	class Player{
+		constructor(){
+			this.username = "Raj";
+			this.score = 0;
+			this.lives = 3;
+		}
+	}
+	const player1 = new Player();
+
+Bundler -> convert Modern js to es5
+	   -> webpack , pulp, etc
+
+DotS Pathway In Computer
+/ => root 
+./ => same folder
+../ => previous folder
+../../ => 2 folder previous
+
+Absolute path -> Use only when we download a pakage from internet 
+Relative path -> Use when file is already in system
+
+
+
+IMPORT
+var ans = require("./script")
+
+console.log(ans.a , ans.b); 
+
+EXPORT
+var a = 12;
+var b = 22;
+
+module.exports = {a,b};
+
+// HOISTING
+var ans;
+console.log(ans);
+var ans = require("./script")
+console.log(ans);
+
+MAIN STACK - FUNCTIONS AND ALL WORKING (SYNC FUNCTION CODE)
+SIDE STACK - ALL ASYNC FUNCTION CODES START AFTER MAIN STACK CODE
+
+CALLBACK FUNCTIONS - ARE GENRALLY USED FOR ASYNCHRONOUS FUNCTIONS 
